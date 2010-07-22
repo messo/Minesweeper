@@ -8,7 +8,7 @@ import hu.krivan.minesweeper.common.Table;
  *
  * @author balint
  */
-public class Game extends Thread {
+public class GamePhase extends Thread {
 
     private final Client p1;
     private final Client p2;
@@ -16,7 +16,7 @@ public class Game extends Thread {
     private boolean should_run = true;
     private int PID = 1;
 
-    public Game(Client c1, Client c2) {
+    public GamePhase(Client c1, Client c2) {
         super("Game");
         p1 = c1;
         p2 = c2;

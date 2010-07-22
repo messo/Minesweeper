@@ -22,7 +22,11 @@ public class Client {
     public static void main(String[] args) {
         try {
             final Client c = new Client();
-            c.connect();
+            if( args.length != 2 ) {
+                System.out.println("USAGE: host port");
+                return;
+            }
+            c.connect(args[0], Integer.parseInt(args[1]));
             UserNameProvider unp = new UserNameProvider(null, true);
             unp.addListener(new ActionListener() {
 
@@ -48,8 +52,8 @@ public class Client {
         }
     }
 
-    private void connect() throws UnknownHostException, IOException {
-        so = new Socket("localhost", 12345);
+    private void connect(String host, int port) throws UnknownHostException, IOException {
+        so = new Socket(host, port);
         is = SocketUtil.getBufferedReader(so);
         os = SocketUtil.getPrintWriter(so);
     }

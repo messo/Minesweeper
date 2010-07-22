@@ -7,6 +7,8 @@ import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
@@ -14,7 +16,7 @@ import javax.swing.JToggleButton;
  *
  * @author  balint
  */
-public abstract class Board extends JPanel implements ActionListener {
+public abstract class Board extends JPanel implements ActionListener, MouseListener {
 
     public Table table;
     MainFrame frame;
@@ -41,15 +43,22 @@ public abstract class Board extends JPanel implements ActionListener {
         Field[][] fields = table.getFields();
         for (int j = 0; j < 21; j++) {
             for (int i = 0; i < 21; i++) {
-                if( fields[i][j].isRevealed() ) {
-                    if(fields[i][j].isMine()) {
+                if (fields[i][j].isRevealed()) {
+                    if (fields[i][j].isMine()) {
+                        System.out.println("mine...");
+                        board[i][j].setContentAreaFilled(false);
+                        board[i][j].setOpaque(true);
                         board[i][j].setBackground(Color.red);
+                        board[i][j].setText("*");
+                    } else {
+                        board[i][j].setText(String.valueOf(fields[i][j].getValue()));
                     }
                     board[i][j].setSelected(true);
-                    board[i][j].setText(String.valueOf(fields[i][j].getValue()));
                 } else {
-                    board[i][j].setText("");
-                    board[i][j].setSelected(false);
+                    if (!board[i][j].getText().equals("X")) {
+                        board[i][j].setText("");
+                        board[i][j].setSelected(false);
+                    }
                 }
             }
         }
@@ -67,6 +76,34 @@ public abstract class Board extends JPanel implements ActionListener {
         }
     }
 
+    @Override
+    public void mouseClicked(MouseEvent e) {
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        if (e.getButton() == MouseEvent.BUTTON3) {
+            JToggleButton btn = (JToggleButton) e.getSource();
+            if (btn.getText().equals("")) {
+                btn.setText("X");
+            } else if (btn.getText().equals("X")) {
+                btn.setText("");
+            }
+        }
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+    }
+
     private void initMyComponents() {
         board = new JToggleButton[21][21];
         JToggleButton btn;
@@ -76,13 +113,13 @@ public abstract class Board extends JPanel implements ActionListener {
                 btn.setPreferredSize(new Dimension(20, 20));
                 btn.setMargin(new Insets(0, 0, 0, 0));
                 btn.addActionListener(this);
+                btn.addMouseListener(this);
                 add(board[i][j] = btn);
             }
         }
     }
 
     protected abstract void onFieldClicked(int x, int y);
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }
