@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) 2010 Bálint Kriván <balint@krivan.hu>. All rights reserved.
+ * Use of this source code is governed by license that can be
+ * found in the LICENSE file.
+ */
 package hu.krivan.minesweeper.server;
 
 import hu.krivan.minesweeper.common.Coords;
@@ -73,7 +78,7 @@ public class GamePhase extends Thread {
         StringBuilder sb = new StringBuilder();
         sb.append("TABLE ").append(p1.getPoints()).append(" ").append(p2.getPoints()).append("\r\n").append(t.zip());
         String s = sb.toString();
-        System.out.println("BROADCASTING: "+s);
+        System.out.println("BROADCASTING: " + s);
 
         broadcast(s);
     }

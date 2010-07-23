@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) 2010 Bálint Kriván <balint@krivan.hu>. All rights reserved.
+ * Use of this source code is governed by license that can be
+ * found in the LICENSE file.
+ */
 package hu.krivan.minesweeper.client;
 
 import hu.krivan.minesweeper.common.Table;
@@ -8,6 +13,7 @@ import javax.swing.JFrame;
  * @author  balint
  */
 public abstract class MainFrame extends JFrame {
+
     private final Board board;
 
     /** Creates new form MainFrame */
@@ -28,9 +34,9 @@ public abstract class MainFrame extends JFrame {
      */
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         statusBar = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -42,8 +48,12 @@ public abstract class MainFrame extends JFrame {
         jPanel1.setVerifyInputWhenFocusTarget(false);
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
+        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
         statusBar.setText("jLabel1");
-        getContentPane().add(statusBar, java.awt.BorderLayout.PAGE_END);
+        jPanel2.add(statusBar);
+
+        getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_END);
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -70,6 +80,7 @@ public abstract class MainFrame extends JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel statusBar;
     // End of variables declaration//GEN-END:variables
 

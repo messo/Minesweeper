@@ -52,6 +52,13 @@
                     </archive>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>com.mycila.maven-license-plugin</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+                <configuration>
+                    <header>header</header>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>

@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) 2010 Bálint Kriván <balint@krivan.hu>. All rights reserved.
+ * Use of this source code is governed by license that can be
+ * found in the LICENSE file.
+ */
 package hu.krivan.minesweeper.client;
 
 import java.awt.event.ActionListener;
@@ -7,6 +12,7 @@ import java.awt.event.ActionListener;
  * @author balint
  */
 public class UserNameProvider extends javax.swing.JDialog {
+
     private ActionListener listener;
 
     /** Creates new form UNameProvider */
@@ -84,7 +90,6 @@ public class UserNameProvider extends javax.swing.JDialog {
         listener.actionPerformed(evt);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

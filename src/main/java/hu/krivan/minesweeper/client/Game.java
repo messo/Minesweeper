@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) 2010 Bálint Kriván <balint@krivan.hu>. All rights reserved.
+ * Use of this source code is governed by license that can be
+ * found in the LICENSE file.
+ */
 package hu.krivan.minesweeper.client;
 
 import hu.krivan.minesweeper.common.Coords;
@@ -14,6 +19,11 @@ public class Game extends Thread {
     private boolean should_run = true;
     private MainFrame frame;
     private final ClickObserver clickObserver = new ClickObserver();
+
+    public class ClickObserver {
+
+        public volatile Coords coords;
+    }
 
     public Game(Client c) {
         super("Game");

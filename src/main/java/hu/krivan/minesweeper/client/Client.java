@@ -1,10 +1,18 @@
+/**
+ * Copyright (c) 2010 Bálint Kriván <balint@krivan.hu>. All rights reserved.
+ * Use of this source code is governed by license that can be
+ * found in the LICENSE file.
+ */
 package hu.krivan.minesweeper.client;
 
 import java.awt.event.ActionEvent;
-import java.io.*;
-import java.net.*;
 import hu.krivan.minesweeper.util.SocketUtil;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextField;
@@ -22,7 +30,7 @@ public class Client {
     public static void main(String[] args) {
         try {
             final Client c = new Client();
-            if( args.length != 2 ) {
+            if (args.length != 2) {
                 System.out.println("USAGE: host port");
                 return;
             }
@@ -67,7 +75,7 @@ public class Client {
     public void disconnect() {
         try {
             so.close();
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace(System.err);
         }
     }

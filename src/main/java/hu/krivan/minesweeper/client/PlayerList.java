@@ -1,9 +1,8 @@
-/*
- * PlayerList.java
- *
- * Created on 2008. április 2., 9:10
+/**
+ * Copyright (c) 2010 Bálint Kriván <balint@krivan.hu>. All rights reserved.
+ * Use of this source code is governed by license that can be
+ * found in the LICENSE file.
  */
-
 package hu.krivan.minesweeper.client;
 
 /**
@@ -11,9 +10,10 @@ package hu.krivan.minesweeper.client;
  * @author  balint
  */
 public class PlayerList extends javax.swing.JFrame {
+
     public ServerConnection so;
     String[] players;
-    
+
     /** Creates new form PlayerList */
     public PlayerList() {
         initComponents();
@@ -26,17 +26,17 @@ public class PlayerList extends javax.swing.JFrame {
     }
 
     public void refreshList() {
-        jList1.setListData( players );
+        jList1.setListData(players);
         jButton2.setEnabled(true);
     }
 
     public void challengeQuestion(String arg) {
         jButton1.setEnabled(false);
-        jButton2.setEnabled(false);        
-        challengerName.setText( arg );
+        jButton2.setEnabled(false);
+        challengerName.setText(arg);
         jDialog2.setVisible(true);
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -57,9 +57,6 @@ public class PlayerList extends javax.swing.JFrame {
         jList1 = new javax.swing.JList();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
 
         jLabel1.setText("The selected user REFUSED the challenge.");
 
@@ -173,14 +170,6 @@ public class PlayerList extends javax.swing.JFrame {
             }
         });
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -188,10 +177,10 @@ public class PlayerList extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
                         .addComponent(jButton2)))
                 .addContainerGap())
         );
@@ -220,14 +209,14 @@ public class PlayerList extends javax.swing.JFrame {
         // TODO add your handling code here:
         jButton1.setEnabled(false);
         jButton2.setEnabled(false);
-        so.challengePlayer( jList1.getSelectedIndex() );
+        so.challengePlayer(jList1.getSelectedIndex());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         jDialog1.setVisible(false);
         jButton1.setEnabled(true);
-        jButton2.setEnabled(true);        
+        jButton2.setEnabled(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptButtonActionPerformed
@@ -241,20 +230,18 @@ public class PlayerList extends javax.swing.JFrame {
         so.refuseChallenge();
         jDialog2.setVisible(false);
         jButton1.setEnabled(true);
-        jButton2.setEnabled(true);        
+        jButton2.setEnabled(true);
     }//GEN-LAST:event_refuseButtonActionPerformed
-    
     /**
      * @param args the command line arguments
      */
     /*public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PlayerList().setVisible(true);
-            }
-        });
+    java.awt.EventQueue.invokeLater(new Runnable() {
+    public void run() {
+    new PlayerList().setVisible(true);
+    }
+    });
     }*/
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton acceptButton;
     private javax.swing.JTextField challengerName;
@@ -266,11 +253,7 @@ public class PlayerList extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JList jList1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton refuseButton;
     // End of variables declaration//GEN-END:variables
-    
 }
