@@ -8,6 +8,8 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 /**
+ * Egy klienst reprezentál, ezen keresztül tudunk vele kommunikálni és a hozzá
+ * kapcsolódó információkat (név, pont) tárolni.
  *
  * @author balint
  */

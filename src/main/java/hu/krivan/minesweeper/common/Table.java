@@ -101,7 +101,6 @@ public class Table {
         int y = click.getY();
 
         if (x >= 0 && y >= 0 && x < 21 && y < 21) {
-
             if (table[x][y].isRevealed()) {
                 return false; // már felfedezett
             }
@@ -112,7 +111,6 @@ public class Table {
             }
 
             reveal(x, y);
-
         } else {
             return false;
         }
@@ -151,7 +149,6 @@ public class Table {
         while (!sor.isEmpty()) {
             // kivesszük az elsőt.
             m = sor.remove(0);
-            //System.out.println( zip() );
             if (m.getValue() == 0) {
                 // berakjuk a szomszédokat, de csak azokat amik még nem felfedezettek
                 for (int a = m.getX() - 1; a <= m.getX() + 1; a++) {

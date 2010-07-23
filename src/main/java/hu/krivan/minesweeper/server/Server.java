@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  *
@@ -14,7 +13,7 @@ public class Server extends Thread {
 
     private static final int DEFAULT_PORT = 12345;
     private int port;
-    public boolean should_run = true;
+    private boolean shouldRun = true;
     private ServerSocket sso;
     private ArrayList<Client> lobby;
     private ArrayList<Client> unknowns;
@@ -50,7 +49,7 @@ public class Server extends Thread {
         System.out.println("The server has been started. It's listening on port " + port);
 
         // gyűjtjük az embereket.
-        while (should_run) {
+        while (shouldRun) {
             try {
                 Socket cso = sso.accept();
                 Client c = new Client(cso, this);
@@ -109,6 +108,5 @@ public class Server extends Thread {
         unknowns.remove(c);
         lobby.remove(c);
         c.disconnect();
-        System.out.println("Client kicked.");
     }
 }
