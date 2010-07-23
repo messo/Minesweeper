@@ -7,15 +7,19 @@ package hu.krivan.minesweeper.client;
 
 import hu.krivan.minesweeper.common.Field;
 import hu.krivan.minesweeper.common.Table;
-import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.net.URL;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -23,9 +27,35 @@ import javax.swing.JToggleButton;
  */
 public abstract class Board extends JPanel implements ActionListener, MouseListener {
 
+    public static final URL imageURL = Board.class.getResource("/mine.png");
+
+    private class FieldWidget extends JPanel {
+
+        private JToggleButton button;
+
+        public FieldWidget(JToggleButton btn) {
+            setLayout(new GridLayout(1, 1));
+            button = btn;
+            add(btn);
+        }
+
+        public JToggleButton getButton() {
+            return button;
+        }
+
+        public void convertToLabel(int count) {
+            remove(button);
+            button = null;
+            if (count == -1) { // mine
+                add(new JLabel(new ImageIcon(imageURL)));
+            } else {
+                add(new JLabel((count == 0) ? " " : String.valueOf(count), SwingConstants.CENTER));
+            }
+        }
+    }
     public Table table;
     MainFrame frame;
-    private JToggleButton[][] board;
+    private FieldWidget[][] board;
 
     /** Creates new form Board */
     public Board() {
@@ -45,28 +75,24 @@ public abstract class Board extends JPanel implements ActionListener, MouseListe
     }// </editor-fold>//GEN-END:initComponents
 
     void onUpdatedTable(Table table) {
+        this.table = table;
         Field[][] fields = table.getFields();
         for (int j = 0; j < 21; j++) {
             for (int i = 0; i < 21; i++) {
-                if (fields[i][j].isRevealed()) {
-                    if (fields[i][j].isMine()) {
-                        System.out.println("mine...");
-                        board[i][j].setContentAreaFilled(false);
-                        board[i][j].setOpaque(true);
-                        board[i][j].setBackground(Color.red);
-                        board[i][j].setText("*");
+                JToggleButton btn = board[i][j].getButton();
+                if (btn != null) {
+                    if (fields[i][j].isRevealed()) {
+                        board[i][j].convertToLabel(fields[i][j].getValue());
                     } else {
-                        board[i][j].setText(String.valueOf(fields[i][j].getValue()));
-                    }
-                    board[i][j].setSelected(true);
-                } else {
-                    if (!board[i][j].getText().equals("X")) {
-                        board[i][j].setText("");
-                        board[i][j].setSelected(false);
+                        if (!btn.getText().equals("X")) {
+                            btn.setText("");
+                            btn.setSelected(false);
+                        }
                     }
                 }
             }
         }
+        validate();
     }
 
     @Override
@@ -74,8 +100,12 @@ public abstract class Board extends JPanel implements ActionListener, MouseListe
         JToggleButton btn = (JToggleButton) e.getSource();
         for (int j = 0; j < 21; j++) {
             for (int i = 0; i < 21; i++) {
-                if (btn.equals(board[i][j])) {
-                    onFieldClicked(i, j);
+                if (btn.equals(board[i][j].getButton())) {
+                    if (table == null || !table.getFields()[i][j].isRevealed()) {
+                        onFieldClicked(i, j);
+                    } else {
+                        btn.setSelected(!btn.isSelected());
+                    }
                 }
             }
         }
@@ -110,7 +140,7 @@ public abstract class Board extends JPanel implements ActionListener, MouseListe
     }
 
     private void initMyComponents() {
-        board = new JToggleButton[21][21];
+        board = new FieldWidget[21][21];
         JToggleButton btn;
         for (int j = 0; j < 21; j++) {
             for (int i = 0; i < 21; i++) {
@@ -119,7 +149,8 @@ public abstract class Board extends JPanel implements ActionListener, MouseListe
                 btn.setMargin(new Insets(0, 0, 0, 0));
                 btn.addActionListener(this);
                 btn.addMouseListener(this);
-                add(board[i][j] = btn);
+                board[i][j] = new FieldWidget(btn);
+                add(board[i][j]);
             }
         }
     }
